@@ -147,7 +147,12 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .pz-arch{border-radius:220px 220px 18px 18px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(80% 70% at 50% 40%,#F7EFE5,#E9DCCB)}
 .pz-arch img{width:88%;height:auto;max-width:100%;display:block}
 .portrait.pz-arch{aspect-ratio:auto;background:none;border:0;border-radius:0;overflow:visible}
-.portrait.pz-arch img{width:100%;filter:drop-shadow(0 24px 40px rgba(120,84,40,.14))}
+.portrait.pz-arch .sig{width:100%}
+/* signature figure: photo + logo stroke that draws itself and shines */
+.sig{position:relative;aspect-ratio:1080/1350;max-width:100%}
+.sig > .sig-photo,.sig > .sig-stroke,.sig > img.sig-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:bottom center}
+.sig > .sig-photo{filter:drop-shadow(0 24px 40px rgba(120,84,40,.15))}
+.sig > .sig-stroke,.sig > img.sig-fallback{z-index:2;pointer-events:none;filter:drop-shadow(0 0 2px rgba(255,244,236,.95)) drop-shadow(0 0 9px rgba(239,198,194,.85)) drop-shadow(0 0 22px rgba(247,227,165,.35))}
 .doc-teaser .portrait{border-radius:200px 200px 16px 16px}
 .ig-strip{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;padding:20px 24px;border-radius:20px;border:1px solid var(--line);background:var(--bg)}
 .ig-strip b{font-size:16px}
@@ -225,7 +230,7 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .pz-grid{display:grid;gap:0;align-items:end}
 @media (min-width:900px){.pz-grid{grid-template-columns:1.05fr .95fr;min-height:760px}}
 .pz-photo{position:relative;height:clamp(440px,64vw,760px);display:flex;align-items:flex-end;justify-content:center;min-width:0}
-.pz-photo > img{position:relative;z-index:2;height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 24px 40px rgba(120,84,40,.16))}
+.pz-photo > .sig{height:100%;width:auto;max-width:100%}
 .pz-arcs{position:absolute;left:50%;bottom:-2%;height:112%;width:auto;aspect-ratio:600/760;max-width:none;transform:translateX(-54%);z-index:1;overflow:visible}
 .pz-arcs path{fill:none;stroke:#FFFDF9;stroke-width:14;stroke-linecap:round;opacity:.9}
 .pz-arcs path.thin{stroke-width:3;opacity:.7}
@@ -242,7 +247,7 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .pz-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:8px}
 .pz-link{font-family:var(--f-campaign);font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#3A2A1C}
 .pz-link b{font-weight:600}
-@media (max-width:899px){.pz-text{padding-block:8px 64px}.pz-photo{margin-top:40px;overflow:hidden}.pz-photo > img{-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent);mask-image:linear-gradient(to bottom,#000 78%,transparent)}}
+@media (max-width:899px){.pz-text{padding-block:8px 64px}.pz-photo{margin-top:40px;overflow:hidden}.pz-photo > .sig .sig-photo{-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent);mask-image:linear-gradient(to bottom,#000 78%,transparent)}}
 
 /* ---------- MOTION ---------- */
 .big-title .ln{display:block;overflow:hidden;padding-bottom:.04em}
@@ -606,7 +611,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   <section class="prazer" id="prazer">
     <div class="wrap pz-grid">
       <div class="pz-photo">
-          <img src="img/dra-beatriz-b.webp" alt="Dra. Beatriz Dias, de vestido branco, com a mão no rosto, envolta pelo traço do B da marca" width="1062" height="1306" loading="lazy">
+          <div class="sig"><img class="sig-photo" src="img/dra-foto.webp" alt="Dra. Beatriz Dias, de vestido branco, com a mão no rosto, envolta pelo traço do B da marca" width="1080" height="1350" loading="lazy"><canvas class="sig-stroke" data-src="img/dra-traco-tempo.png" data-fallback="img/dra-traco.webp" width="1080" height="1350" aria-hidden="true"></canvas></div>
       </div>
       <div class="pz-text">
         <a class="pz-handle" href="https://www.instagram.com/drabibia/" target="_blank" rel="noopener"><img src="img/dra-avatar.jpg" alt="" width="40" height="40"><span><b>Beatriz Dias</b><small>@drabibia</small></span></a>
@@ -710,7 +715,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   </div></header>
   <section>
     <div class="wrap about-grid">
-      <div class="portrait pz-arch"><img src="img/dra-beatriz-b.webp" alt="Dra. Beatriz Dias" width="1062" height="1306" loading="lazy"></div>
+      <div class="portrait pz-arch"><div class="sig"><img class="sig-photo" src="img/dra-foto.webp" alt="Dra. Beatriz Dias" width="1080" height="1350" loading="lazy"><canvas class="sig-stroke" data-src="img/dra-traco-tempo.png" data-fallback="img/dra-traco.webp" width="1080" height="1350" aria-hidden="true"></canvas></div></div>
       <div>
         <p class="eyebrow">Quem vai cuidar de você</p>
         <blockquote>Gosto quando a paciente se olha no espelho e se reconhece, só que mais descansada e mais confiante.</blockquote>
@@ -1028,6 +1033,70 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
       (function loop(){px+=(cx-px)*.18;py+=(cy-py)*.18;cur.style.transform='translate('+px+'px,'+py+'px)';requestAnimationFrame(loop)})();
     }
   }
+
+  /* ---- logo stroke: draws itself along the line, then a light glides along it ---- */
+  (function(){
+    var figs=[].slice.call(document.querySelectorAll('.sig'));
+    if(!figs.length) return;
+    var reduceM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var BASE=[236,192,184], HEAD=[255,250,240], SHINE=[255,246,228];
+    function fallback(cv){ var im=document.createElement('img'); im.className='sig-fallback'; im.alt=''; im.src=cv.dataset.fallback; cv.replaceWith(im); }
+    function setup(fig){
+      var cv=fig.querySelector('canvas'); if(!cv) return;
+      var img=new Image();
+      img.onload=function(){
+        var w=img.naturalWidth,h=img.naturalHeight, tmp=document.createElement('canvas'); tmp.width=w; tmp.height=h;
+        var tc=tmp.getContext('2d'), src; tc.drawImage(img,0,0);
+        try{ src=tc.getImageData(0,0,w,h).data; }catch(e){ fallback(cv); return; }
+        var n=0,i; for(i=3;i<src.length;i+=4) if(src[i]>0) n++;
+        var pix=new Uint32Array(n), tm=new Uint16Array(n), al=new Uint8Array(n), k=0;
+        for(i=0;i<w*h;i++){ var a=src[i*4+3]; if(a>0){ pix[k]=i; tm[k]=(src[i*4]<<8)|src[i*4+1]; al[k]=a; k++; } }
+        var ord=new Uint32Array(n); for(i=0;i<n;i++) ord[i]=i;
+        ord.sort(function(x,y){return tm[x]-tm[y]});
+        cv.width=w; cv.height=h;
+        var ctx=cv.getContext('2d'), out=ctx.createImageData(w,h), od=out.data;
+        var bx0,by0,bx1,by1;
+        function resetBox(){bx0=w;by0=h;bx1=-1;by1=-1;}
+        function paint(j,c,boost){ var p=pix[j], o=p*4, x=p%w, y=(p/w)|0; od[o]=c[0]; od[o+1]=c[1]; od[o+2]=c[2]; od[o+3]=Math.min(255,al[j]*(boost||1));
+          if(x<bx0)bx0=x; if(x>bx1)bx1=x; if(y<by0)by0=y; if(y>by1)by1=y; }
+        function flush(){ if(bx1>=0) ctx.putImageData(out,0,0,bx0,by0,bx1-bx0+1,by1-by0+1); }
+        if(reduceM){ resetBox(); for(i=0;i<n;i++) paint(ord[i],BASE); flush(); return; }
+        var DRAW=3800, HEADW=5200, r=0, tail=0, started=false;
+        function ease(x){return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2}
+        function draw(t0){
+          (function frame(now){
+            var p=Math.min(1,(now-t0)/DRAW), t=ease(p)*65535; resetBox();
+            while(r<n && tm[ord[r]]<=t){ paint(ord[r],HEAD,1.15); r++; }
+            while(tail<r && tm[ord[tail]]<t-HEADW){ paint(ord[tail],BASE); tail++; }
+            flush();
+            if(p<1) requestAnimationFrame(frame);
+            else { resetBox(); while(tail<n){ paint(ord[tail],BASE); tail++; } flush(); setTimeout(shine,1800); }
+          })(t0);
+        }
+        /* after the drawing: a soft light travels the whole line every few seconds */
+        var visible=true;
+        function shine(){
+          if(!visible){ setTimeout(shine,2500); return; }
+          var t0=performance.now(), DUR=2600, W=7000, a=0, b=0;
+          (function frame(now){
+            var t=(now-t0)/DUR*(65535+W); resetBox();
+            while(a<n && tm[ord[a]]<=t){ paint(ord[a],SHINE,1.2); a++; }
+            while(b<a && tm[ord[b]]<t-W){ paint(ord[b],BASE); b++; }
+            flush();
+            if(b<n) requestAnimationFrame(frame); else setTimeout(shine,4200);
+          })(t0);
+        }
+        var io2=new IntersectionObserver(function(es){ es.forEach(function(e){
+          visible=e.isIntersecting;
+          if(e.isIntersecting && !started){ started=true; draw(performance.now()); }
+        }); },{threshold:.3});
+        io2.observe(fig);
+      };
+      img.onerror=function(){ fallback(cv); };
+      img.src=cv.dataset.src;
+    }
+    figs.forEach(setup);
+  })();
 
   var split=document.getElementById('split'), range=document.getElementById('split-range');
   range.addEventListener('input',function(){split.style.setProperty('--pos',range.value+'%')});
