@@ -980,7 +980,11 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   var layers=[].slice.call(document.querySelectorAll('.lip-layer')), inflate=document.getElementById('lip-inflate');
   /* morph video: the level scrubs the video instead of cross-fading photos */
   var lipVid=document.getElementById('lip-video'), vidReady=false, vidWant=0;
-  function seekVid(){ if(!vidReady) return; var d=lipVid.duration-0.06, t=Math.max(0,Math.min(d,vidWant*d));
+  /* the video fills unevenly (most of the change happens in the middle), so map the level to the
+     moment where that much visual change has happened: measured from the video, 21 steps */
+  var FILL_MAP=[0.0, 0.125, 0.833, 1.125, 1.375, 1.542, 1.708, 1.875, 2.0, 2.125, 2.208, 2.292, 2.375, 2.458, 2.542, 2.667, 2.875, 3.083, 4.292, 5.083, 5.125];
+  function fillTime(q){ q=Math.max(0,Math.min(1,q))*(FILL_MAP.length-1); var i=Math.floor(q), f=q-i; return i>=FILL_MAP.length-1?FILL_MAP[FILL_MAP.length-1]:FILL_MAP[i]+(FILL_MAP[i+1]-FILL_MAP[i])*f; }
+  function seekVid(){ if(!vidReady) return; var d=lipVid.duration-0.06, t=Math.max(0,Math.min(d,fillTime(vidWant)));
     if(lipVid.seeking){ return; } if(Math.abs(lipVid.currentTime-t)>0.015) lipVid.currentTime=t; }
   if(lipVid){
     lipVid.addEventListener('seeked',seekVid);
