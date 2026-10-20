@@ -85,6 +85,9 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .vol-stage{position:relative}
 .vol-view{background-image:none!important;background-color:#EEDCD1}
 .lip-inflate{position:absolute;inset:0;transform-origin:50% 55%;will-change:transform}
+.lip-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;opacity:0;transition:opacity .4s;pointer-events:none}
+.vol-view.has-video .lip-video{opacity:1}
+.vol-view.has-video .lip-layer{visibility:hidden}
 .lip-layer{position:absolute;inset:0;background-size:cover;background-position:50% 50%;opacity:0}
 .lip-layer:nth-child(1){background-image:url("img/labio-0.jpg")}.lip-layer:nth-child(2){background-image:url("img/labio-1.jpg")}.lip-layer:nth-child(3){background-image:url("img/labio-2.jpg")}.lip-layer:nth-child(4){background-image:url("img/labio-3.jpg")}.lip-layer:nth-child(5){background-image:url("img/labio-4.jpg")}
 .lip-layer:first-child{opacity:1}
@@ -618,6 +621,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
           <div class="vol-view" id="vol-view" role="img" aria-label="Lábios em volume natural">
             <div class="lip-inflate" id="lip-inflate">
               <div class="lip-layer" style="--row:0"></div><div class="lip-layer" style="--row:1"></div><div class="lip-layer" style="--row:2"></div><div class="lip-layer" style="--row:3"></div><div class="lip-layer" style="--row:4"></div>
+              <video class="lip-video" id="lip-video" poster="img/labios-morph-0.jpg" muted playsinline preload="auto" disablepictureinpicture aria-hidden="true" tabindex="-1"><source src="video/labios-morph.mp4" type="video/mp4"><source src="video/labios-morph.webm" type="video/webm"></video>
             </div>
             <span class="tag" id="vol-tag">Natural</span><span class="vol-ml" id="vol-ml" aria-hidden="true"></span>
           </div>
@@ -973,12 +977,24 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   var vview=document.getElementById('vol-view'), vtag=document.getElementById('vol-tag'), vdesc=document.getElementById('vol-desc');
   var dots=[].slice.call(document.querySelectorAll('.vol-track span')), vml=document.getElementById('vol-ml'), vbar=document.getElementById('vol-bar');
   var layers=[].slice.call(document.querySelectorAll('.lip-layer')), inflate=document.getElementById('lip-inflate');
+  /* morph video: the level scrubs the video instead of cross-fading photos */
+  var lipVid=document.getElementById('lip-video'), vidReady=false, vidWant=0;
+  function seekVid(){ if(!vidReady) return; var d=lipVid.duration-0.06, t=Math.max(0,Math.min(d,vidWant*d));
+    if(lipVid.seeking){ return; } if(Math.abs(lipVid.currentTime-t)>0.015) lipVid.currentTime=t; }
+  if(lipVid){
+    lipVid.addEventListener('seeked',seekVid);
+    function ready(){ if(vidReady||!(lipVid.duration>0)) return; vidReady=true; document.getElementById('vol-view').classList.add('has-video'); seekVid(); }
+    lipVid.addEventListener('loadeddata',ready); lipVid.addEventListener('canplay',ready);
+    lipVid.addEventListener('error',function(){ vidReady=false; document.getElementById('vol-view').classList.remove('has-video'); });
+    try{ lipVid.load(); }catch(e){}
+  }
   var pump=document.getElementById('pump'), pumpFill=document.getElementById('pump-fill'), pumpLabel=document.getElementById('pump-label');
   var level=0, curRow=-1, MAX=4;
   /* draw a continuous level 0..4: each layer fades in on top of the previous one */
   function draw(v){
     level=Math.max(0,Math.min(MAX,v));
     layers.forEach(function(l,i){ if(i>0) l.style.opacity=Math.max(0,Math.min(1,level-(i-1))); });
+    vidWant=level/MAX; seekVid();
     vbar.style.width=(level/MAX*100)+'%';
     pumpFill.style.strokeDashoffset=289*(1-level/MAX);
     vml.textContent = level<0.05 ? '' : (Math.abs(level-Math.round(level))<0.05 ? String(Math.round(level)) : level.toFixed(1).replace('.',','));
