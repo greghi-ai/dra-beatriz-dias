@@ -631,13 +631,13 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
       <div class="fala-text">
         <p class="eyebrow">Em vídeo</p>
         <h2>A Dra. Beatriz <em class="serif">explica</em></h2>
-        <p class="lead">Como é o preenchimento labial na prática, o que acontece na avaliação e por que o resultado natural começa no planejamento.</p>
+        <p class="lead">Um recado rápido da Dra. Beatriz sobre transformações naturais e como agendar a sua avaliação.</p>
       </div>
       <div class="fala-media">
         <figure class="reel" id="reel">
           <video id="reel-video" playsinline preload="metadata" poster="img/dra-reel-poster.jpg" data-src="video/dra-beatriz.mp4"></video>
           <button type="button" class="reel-play" id="reel-play" aria-label="Assistir ao vídeo da Dra. Beatriz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button>
-          <figcaption class="reel-cap"><b>Dra. Beatriz Dias</b><span>Preenchimento labial natural</span></figcaption>
+          <figcaption class="reel-cap"><b>Dra. Beatriz Dias</b><span>Toque para assistir · 25 s</span></figcaption>
           <p class="reel-empty" id="reel-empty" hidden>O vídeo da Dra. entra aqui<br><small>formato 9:16 · arquivo video/dra-beatriz.mp4</small></p>
         </figure>
         <a class="btn gal-btn" href="#galeria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Galeria <small>fotos e vídeos</small></a>
@@ -1138,7 +1138,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     var src=v.dataset.src;
     function markEmpty(){ reel.classList.add('empty'); empty.hidden=false; }
     fetch(src,{method:'HEAD'}).then(function(r){ if(r.ok){ v.src=src; v.controls=false; } else markEmpty(); }).catch(markEmpty);
-    play.addEventListener('click',function(){ var p=v.play(); reel.classList.add('playing'); v.controls=true; if(p&&p.catch) p.catch(function(){ reel.classList.remove('playing'); markEmpty(); }); });
+    play.addEventListener('click',function(){ var p=v.play(); reel.classList.add('playing'); v.controls=true; if(p&&p.catch) p.catch(function(){ reel.classList.remove('playing'); v.controls=true; }); });
     v.addEventListener('pause',function(){ if(v.currentTime<0.2||v.ended){ reel.classList.remove('playing'); v.controls=false; } });
     v.addEventListener('ended',function(){ reel.classList.remove('playing'); v.controls=false; });
   })();
@@ -1147,7 +1147,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   var GALERIA=[
     {tipo:'foto',  src:'img/dra-foto.webp', legenda:'Dra. Beatriz Dias'},
     {tipo:'foto',  src:'img/labios.jpg', legenda:'Preenchimento labial: do natural aos 4 ml (ilustrativo)'},
-    {tipo:'video', src:'video/dra-beatriz.mp4', poster:'img/dra-reel-poster.jpg', legenda:'A Dra. explica o preenchimento labial'},
+    {tipo:'video', src:'video/dra-beatriz.mp4', poster:'img/dra-reel-poster.jpg', legenda:'Recado da Dra. Beatriz'},
     {tipo:'foto',  vazio:'foto da recepção', legenda:'BD Clinic · recepção', h:300},
     {tipo:'video', vazio:'vídeo · bastidores do atendimento', legenda:'Bastidores', h:420},
     {tipo:'foto',  vazio:'antes e depois · lábios', legenda:'Antes e depois (com autorização)', h:260},
