@@ -249,6 +249,56 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .pz-link b{font-weight:600}
 @media (max-width:899px){.pz-text{padding-block:8px 64px}.pz-photo{margin-top:40px;overflow:hidden}.pz-photo > .sig .sig-photo{-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent);mask-image:linear-gradient(to bottom,#000 78%,transparent)}}
 
+
+/* video 9:16 + gallery button */
+.fala{padding-top:0}
+.fala-wrap{display:grid;gap:36px;align-items:center}
+@media (min-width:900px){.fala-wrap{grid-template-columns:1fr auto;gap:80px}}
+.fala-text{display:grid;gap:16px;max-width:520px}
+.fala-media{display:grid;gap:18px;justify-items:center}
+.reel{position:relative;margin:0;width:min(340px,82vw);aspect-ratio:9/16;border-radius:28px;overflow:hidden;background:radial-gradient(80% 60% at 50% 35%,#F7EFE5,#E6D3C1);box-shadow:0 30px 70px rgba(120,84,40,.22),0 0 0 6px #FFFDF9,0 0 0 7px rgba(184,137,63,.25)}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent}
+.reel::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(40,28,18,.55),transparent 38%);pointer-events:none;transition:opacity .3s}
+.reel.playing::after,.reel.playing .reel-cap{opacity:0}
+.reel-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;border:0;cursor:pointer;color:#3A2A1C;display:grid;place-items:center;z-index:2;
+  background:linear-gradient(135deg,rgba(255,252,247,.78),rgba(250,238,228,.6));-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(58,42,28,.25),inset 0 1px 0 rgba(255,255,255,.9);transition:transform .2s,opacity .25s}
+.reel-play svg{width:28px;height:28px;margin-left:4px}
+.reel-play:hover{transform:translate(-50%,-50%) scale(1.06)}
+.reel.playing .reel-play{opacity:0;pointer-events:none}
+.reel-cap{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;color:#FFFDF9;display:grid;gap:2px;transition:opacity .3s}
+.reel-cap b{font-family:var(--f-display);font-weight:400;font-size:20px}
+.reel-cap span{font-family:var(--f-campaign);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.reel-empty{position:absolute;left:16px;right:16px;top:16px;z-index:2;margin:0;text-align:center;font-family:var(--f-campaign);font-size:13px;line-height:1.35;color:#3A2A1C;padding:10px 14px;border-radius:16px;background:linear-gradient(135deg,rgba(255,252,247,.82),rgba(250,238,228,.66));-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.reel-empty small{font-size:11px;color:#7D6A57}
+.reel.empty .reel-play{display:none}
+.gal-btn{background:linear-gradient(135deg,rgba(255,252,247,.82),rgba(250,238,228,.7));color:#3A2A1C;border:1px solid rgba(184,137,63,.35);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 10px 28px rgba(120,84,40,.12);font-family:var(--f-campaign);font-size:16px;font-weight:500;letter-spacing:.04em}
+.gal-btn svg{width:18px;height:18px;color:#B8893F}
+.gal-btn small{font-weight:400;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7D6A57;margin-left:2px}
+/* gallery */
+.gal-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.gal-filters button{font-family:var(--f-campaign);font-size:15px;padding:10px 22px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.gal-filters button[aria-selected="true"]{background:var(--pink);border-color:var(--pink)}
+.gal-grid{columns:3 260px;column-gap:14px}
+.gal-item{break-inside:avoid;margin:0 0 14px;position:relative;border-radius:18px;overflow:hidden;background:var(--surface);border:1px solid var(--line);display:block;width:100%;padding:0;cursor:pointer;text-align:left;color:inherit;font:inherit}
+.gal-item img{display:block;width:100%;height:auto}
+.gal-item .ph{display:grid;place-items:center;text-align:center;color:var(--muted);background:repeating-linear-gradient(135deg,#F7EFE5 0 14px,#FBF6EF 14px 28px);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;padding:16px}
+.gal-item .tag{position:absolute;left:12px;top:12px;font-family:var(--f-campaign);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(255,253,249,.85);color:#3A2A1C}
+.gal-item .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#3A2A1C;background:rgba(255,253,249,.85);box-shadow:0 8px 20px rgba(58,42,28,.2)}
+.gal-item .pl svg{width:20px;height:20px;margin-left:3px}
+.gal-item figcaption{padding:12px 14px;font-size:13px;color:var(--muted)}
+.gal-item[disabled]{cursor:default}
+.gal-item.soon .pl{width:auto;height:auto;padding:8px 14px;border-radius:999px;font-family:var(--f-campaign);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.gal-item[hidden]{display:none!important}
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:110;background:rgba(30,22,15,.86);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;padding:calc(56px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(56px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb-stage{max-width:min(1000px,100%);max-height:100%;display:grid;place-items:center}
+.lb-stage img,.lb-stage video{max-width:100%;max-height:calc(100vh - 160px);border-radius:14px;display:block}
+.lb-close,.lb-nav{position:absolute;border:0;cursor:pointer;color:#FFFDF9;background:rgba(255,253,249,.12);width:46px;height:46px;border-radius:50%;font-size:26px;line-height:1}
+.lb-close{top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px))}
+.lb-prev{left:calc(12px + env(safe-area-inset-left,0px));top:50%}
+.lb-next{right:calc(12px + env(safe-area-inset-right,0px));top:50%}
+.lb-cap{position:absolute;left:0;right:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));text-align:center;color:rgba(255,253,249,.85);font-size:14px}
+
 /* ---------- MOTION ---------- */
 .big-title .ln{display:block;overflow:hidden;padding-bottom:.04em}
 .big-title .ln > span{display:block}
@@ -487,6 +537,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
           <a href="#sobre">Sobre a Dra. <small>04</small></a>
           <a href="#clinica">A Clínica <small>05</small></a>
           <a href="#duvidas">Dúvidas <small>06</small></a>
+          <a href="#galeria">Galeria <small>07</small></a>
         </nav>
         <div class="drawer-foot">WhatsApp (13) 99107-3866<br>CROSP 150757 · Praia Grande/SP</div>
       </div>
@@ -573,6 +624,25 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
       </div>
     </div>
    </div>
+  </section>
+
+  <section class="fala" id="fala">
+    <div class="wrap fala-wrap">
+      <div class="fala-text">
+        <p class="eyebrow">Em vídeo</p>
+        <h2>A Dra. Beatriz <em class="serif">explica</em></h2>
+        <p class="lead">Como é o preenchimento labial na prática, o que acontece na avaliação e por que o resultado natural começa no planejamento.</p>
+      </div>
+      <div class="fala-media">
+        <figure class="reel" id="reel">
+          <video id="reel-video" playsinline preload="metadata" poster="img/dra-reel-poster.jpg" data-src="video/dra-beatriz.mp4"></video>
+          <button type="button" class="reel-play" id="reel-play" aria-label="Assistir ao vídeo da Dra. Beatriz"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button>
+          <figcaption class="reel-cap"><b>Dra. Beatriz Dias</b><span>Preenchimento labial natural</span></figcaption>
+          <p class="reel-empty" id="reel-empty" hidden>O vídeo da Dra. entra aqui<br><small>formato 9:16 · arquivo video/dra-beatriz.mp4</small></p>
+        </figure>
+        <a class="btn gal-btn" href="#galeria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Galeria <small>fotos e vídeos</small></a>
+      </div>
+    </div>
   </section>
 
   <section>
@@ -777,6 +847,33 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   </section>
 </div>
 
+<!-- ===================== ÁREA 7 · GALERIA ===================== -->
+<div class="area" data-area="galeria" hidden>
+  <header class="area-banner"><div class="hero-photo" aria-hidden="true"></div><div class="wrap">
+    <p class="eyebrow">Galeria</p><h1>Fotos e vídeos</h1>
+    <p>Bastidores, resultados e o dia a dia da BD Clinic.</p>
+  </div></header>
+  <section>
+    <div class="wrap">
+      <div class="gal-filters" role="tablist" aria-label="Filtrar galeria">
+        <button type="button" role="tab" aria-selected="true" data-f="todos">Tudo</button>
+        <button type="button" role="tab" aria-selected="false" data-f="foto">Fotos</button>
+        <button type="button" role="tab" aria-selected="false" data-f="video">Vídeos</button>
+      </div>
+      <div class="gal-grid" id="gal-grid"></div>
+      <p class="legal-note">Imagens de pacientes publicadas com autorização. Os resultados variam de pessoa para pessoa.</p>
+    </div>
+  </section>
+</div>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Galeria">
+  <button type="button" class="lb-close" id="lb-close" aria-label="Fechar">×</button>
+  <button type="button" class="lb-nav lb-prev" id="lb-prev" aria-label="Anterior">‹</button>
+  <div class="lb-stage" id="lb-stage"></div>
+  <button type="button" class="lb-nav lb-next" id="lb-next" aria-label="Próximo">›</button>
+  <p class="lb-cap" id="lb-cap"></p>
+</div>
+
 <!-- closing CTA (all areas) -->
 <section class="final">
   <div class="wrap">
@@ -838,7 +935,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     try{history.pushState(null,'','#'+name)}catch(err){}
     go(name);
   });
-  var LABELS={inicio:'Início',procedimentos:'Procedimentos',resultados:'Resultados',sobre:'Sobre a Dra.',clinica:'A Clínica',duvidas:'Dúvidas'};
+  var LABELS={inicio:'Início',procedimentos:'Procedimentos',resultados:'Resultados',sobre:'Sobre a Dra.',clinica:'A Clínica',duvidas:'Dúvidas',galeria:'Galeria'};
   var curtain=document.getElementById('curtain'), clabel=document.getElementById('curtain-label'), busy=false;
   var motionOK=true;
   function go(name){
@@ -946,7 +1043,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   if('IntersectionObserver' in window){
     document.documentElement.classList.add('js');
     if(!reduce) document.documentElement.classList.add('js-full');
-    var sel='.sec-head,.area-card,.proc,.step,.principles > div,.volume > *,.doc-teaser > *,.pz-text > *,.pz-photo,.ba,.quote,details,.final .wrap > *,.split-wrap > *,.manifesto-grid > .sec-head,.about-grid > *,.clinic-grid > *,.results,.ig-strip';
+    var sel='.sec-head,.area-card,.proc,.step,.principles > div,.volume > *,.doc-teaser > *,.pz-text > *,.pz-photo,.fala-text > *,.fala-media,.gal-item,.ba,.quote,details,.final .wrap > *,.split-wrap > *,.manifesto-grid > .sec-head,.about-grid > *,.clinic-grid > *,.results,.ig-strip';
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
     document.querySelectorAll(sel).forEach(function(el){
       if(el.closest('.hero2'))return;
@@ -1034,6 +1131,66 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     }
   }
 
+  /* ---- video 9:16 ---- */
+  (function(){
+    var reel=document.getElementById('reel'), v=document.getElementById('reel-video'), play=document.getElementById('reel-play'), empty=document.getElementById('reel-empty');
+    if(!reel) return;
+    var src=v.dataset.src;
+    function markEmpty(){ reel.classList.add('empty'); empty.hidden=false; }
+    fetch(src,{method:'HEAD'}).then(function(r){ if(r.ok){ v.src=src; v.controls=false; } else markEmpty(); }).catch(markEmpty);
+    play.addEventListener('click',function(){ var p=v.play(); reel.classList.add('playing'); v.controls=true; if(p&&p.catch) p.catch(function(){ reel.classList.remove('playing'); markEmpty(); }); });
+    v.addEventListener('pause',function(){ if(v.currentTime<0.2||v.ended){ reel.classList.remove('playing'); v.controls=false; } });
+    v.addEventListener('ended',function(){ reel.classList.remove('playing'); v.controls=false; });
+  })();
+
+  /* ---- gallery: edit this list to add photos and videos ---- */
+  var GALERIA=[
+    {tipo:'foto',  src:'img/dra-foto.webp', legenda:'Dra. Beatriz Dias'},
+    {tipo:'foto',  src:'img/labios.jpg', legenda:'Preenchimento labial: do natural aos 4 ml (ilustrativo)'},
+    {tipo:'video', src:'video/dra-beatriz.mp4', poster:'img/dra-reel-poster.jpg', legenda:'A Dra. explica o preenchimento labial'},
+    {tipo:'foto',  vazio:'foto da recepção', legenda:'BD Clinic · recepção', h:300},
+    {tipo:'video', vazio:'vídeo · bastidores do atendimento', legenda:'Bastidores', h:420},
+    {tipo:'foto',  vazio:'antes e depois · lábios', legenda:'Antes e depois (com autorização)', h:260},
+    {tipo:'foto',  vazio:'sala de atendimento', legenda:'Sala de atendimento', h:340},
+    {tipo:'video', vazio:'vídeo · depoimento de paciente', legenda:'Depoimento', h:420},
+    {tipo:'foto',  vazio:'antes e depois · contorno', legenda:'Antes e depois (com autorização)', h:280}
+  ];
+  (function(){
+    var grid=document.getElementById('gal-grid'); if(!grid) return;
+    var PL='<span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>';
+    GALERIA.forEach(function(it,i){
+      var b=document.createElement('button'); b.type='button'; b.className='gal-item'; b.dataset.tipo=it.tipo; b.dataset.i=i;
+      var media = it.vazio ? '<div class="ph" style="height:'+(it.h||300)+'px">[ '+it.vazio+' ]</div>'
+                : it.tipo==='foto' ? '<img src="'+it.src+'" alt="'+it.legenda+'" loading="lazy">'
+                : '<img src="'+(it.poster||'img/dra-reel-poster.jpg')+'" alt="'+it.legenda+'" loading="lazy">'+PL;
+      b.innerHTML=media+'<span class="tag">'+(it.tipo==='foto'?'Foto':'Vídeo')+'</span><figcaption>'+it.legenda+'</figcaption>';
+      if(it.vazio) b.disabled=true;
+      grid.appendChild(b);
+      if(!it.vazio && it.tipo==='video') fetch(it.src,{method:'HEAD'}).then(function(r){ if(!r.ok) throw 0; }).catch(function(){ it.vazio='em breve'; b.disabled=true; b.classList.add('soon'); var pl=b.querySelector('.pl'); if(pl) pl.textContent='Vídeo em breve'; });
+    });
+    [].forEach.call(document.querySelectorAll('.gal-filters button'),function(f){
+      f.addEventListener('click',function(){
+        [].forEach.call(document.querySelectorAll('.gal-filters button'),function(x){x.setAttribute('aria-selected',x===f?'true':'false')});
+        [].forEach.call(grid.children,function(c){ c.hidden = f.dataset.f!=='todos' && c.dataset.tipo!==f.dataset.f; });
+      });
+    });
+    var lb=document.getElementById('lightbox'), stage=document.getElementById('lb-stage'), cap=document.getElementById('lb-cap'), cur=-1, lastFocus=null;
+    function playable(){ return GALERIA.map(function(x,i){return i}).filter(function(i){ var c=grid.children[i]; return !GALERIA[i].vazio && !c.hidden; }); }
+    function open(i){
+      cur=i; var it=GALERIA[i];
+      stage.innerHTML = it.tipo==='foto' ? '<img src="'+it.src+'" alt="'+it.legenda+'">' : '<video src="'+it.src+'" controls playsinline autoplay poster="'+(it.poster||'')+'"></video>';
+      cap.textContent=it.legenda; lb.hidden=false; document.body.style.overflow='hidden'; document.getElementById('lb-close').focus();
+    }
+    function close(){ stage.innerHTML=''; lb.hidden=true; document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+    function step(d){ var list=playable(); if(!list.length) return; var k=list.indexOf(cur); open(list[(k+d+list.length)%list.length]); }
+    grid.addEventListener('click',function(e){ var b=e.target.closest('.gal-item'); if(!b||b.disabled) return; lastFocus=b; open(+b.dataset.i); });
+    document.getElementById('lb-close').addEventListener('click',close);
+    document.getElementById('lb-prev').addEventListener('click',function(){step(-1)});
+    document.getElementById('lb-next').addEventListener('click',function(){step(1)});
+    lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+    document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowRight') step(1); if(e.key==='ArrowLeft') step(-1); });
+  })();
+
   /* ---- logo stroke: draws itself along the line, then a light glides along it ---- */
   (function(){
     var figs=[].slice.call(document.querySelectorAll('.sig'));
@@ -1057,38 +1214,41 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
         var ctx=cv.getContext('2d'), out=ctx.createImageData(w,h), od=out.data;
         var bx0,by0,bx1,by1;
         function resetBox(){bx0=w;by0=h;bx1=-1;by1=-1;}
-        function paint(j,c,boost){ var p=pix[j], o=p*4, x=p%w, y=(p/w)|0; od[o]=c[0]; od[o+1]=c[1]; od[o+2]=c[2]; od[o+3]=Math.min(255,al[j]*(boost||1));
+        function paint(j,c,boost){ var p=pix[j], o=p*4, x=p%w, y=(p/w)|0; od[o]=c[0]; od[o+1]=c[1]; od[o+2]=c[2]; od[o+3]=Math.min(255,al[j]*(boost==null?1:boost));
           if(x<bx0)bx0=x; if(x>bx1)bx1=x; if(y<by0)by0=y; if(y>by1)by1=y; }
         function flush(){ if(bx1>=0) ctx.putImageData(out,0,0,bx0,by0,bx1-bx0+1,by1-by0+1); }
         if(reduceM){ resetBox(); for(i=0;i<n;i++) paint(ord[i],BASE); flush(); return; }
-        var DRAW=3800, HEADW=5200, r=0, tail=0, started=false;
+        /* endless cycle: draw along the line -> a light passes -> the line is taken back from its start -> draw again */
+        var started=false, visible=true;
         function ease(x){return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2}
-        function draw(t0){
+        function sweep(dur,W,enterColor,enterBoost,leaveColor,leaveBoost,done,eased){
+          var t0=performance.now(), a=0, b=0;
           (function frame(now){
-            var p=Math.min(1,(now-t0)/DRAW), t=ease(p)*65535; resetBox();
-            while(r<n && tm[ord[r]]<=t){ paint(ord[r],HEAD,1.15); r++; }
-            while(tail<r && tm[ord[tail]]<t-HEADW){ paint(ord[tail],BASE); tail++; }
+            var p=Math.min(1,(now-t0)/dur), t=(eased?ease(p):p)*(65535+W); resetBox();
+            while(a<n && tm[ord[a]]<=t){ paint(ord[a],enterColor,enterBoost); a++; }
+            while(b<a && tm[ord[b]]<t-W){ paint(ord[b],leaveColor,leaveBoost); b++; }
             flush();
             if(p<1) requestAnimationFrame(frame);
-            else { resetBox(); while(tail<n){ paint(ord[tail],BASE); tail++; } flush(); setTimeout(shine,1800); }
+            else { resetBox(); while(b<n){ paint(ord[b],leaveColor,leaveBoost); b++; } flush(); done(); }
           })(t0);
         }
-        /* after the drawing: a soft light travels the whole line every few seconds */
-        var visible=true;
-        function shine(){
-          if(!visible){ setTimeout(shine,2500); return; }
-          var t0=performance.now(), DUR=2600, W=7000, a=0, b=0;
-          (function frame(now){
-            var t=(now-t0)/DUR*(65535+W); resetBox();
-            while(a<n && tm[ord[a]]<=t){ paint(ord[a],SHINE,1.2); a++; }
-            while(b<a && tm[ord[b]]<t-W){ paint(ord[b],BASE); b++; }
-            flush();
-            if(b<n) requestAnimationFrame(frame); else setTimeout(shine,4200);
-          })(t0);
+        function later(fn,ms){ setTimeout(function(){ if(visible) fn(); else { var w=setInterval(function(){ if(visible){ clearInterval(w); fn(); } },400); } },ms); }
+        function cycle(){
+          sweep(4200,5200,HEAD,1.15,BASE,1,function(){            /* 1. draws itself */
+            later(function(){
+              sweep(2400,7000,SHINE,1.25,BASE,1,function(){        /* 2. light runs along it */
+                later(function(){
+                  sweep(3200,4200,HEAD,1.1,BASE,0,function(){      /* 3. taken back from the start */
+                    later(cycle,700);
+                  },true);
+                },500);
+              });
+            },900);
+          },true);
         }
         var io2=new IntersectionObserver(function(es){ es.forEach(function(e){
           visible=e.isIntersecting;
-          if(e.isIntersecting && !started){ started=true; draw(performance.now()); }
+          if(e.isIntersecting && !started){ started=true; cycle(); }
         }); },{threshold:.3});
         io2.observe(fig);
       };
