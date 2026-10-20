@@ -570,7 +570,6 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
       <div class="stage">
         <div class="framed" role="img" aria-label="Dra. Beatriz Dias de perfil, com o traço do B da marca sobre a foto">
           <div class="crop" id="hero-crop"></div>
-          <span class="shutter-line" aria-hidden="true"></span>
         </div>
         <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
         <span class="callout l1">Planejamento<br>facial<i></i></span>
@@ -1183,33 +1182,6 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     document.getElementById('lb-next').addEventListener('click',function(){step(1)});
     lb.addEventListener('click',function(e){ if(e.target===lb||e.target===stage) close(); });
     document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowRight') step(1); if(e.key==='ArrowLeft') step(-1); });
-  })();
-
-  /* ---- hero frame: closes like a shutter and opens on the next photo ---- */
-  (function(){
-    var crop=document.getElementById('hero-crop'); if(!crop) return;
-    var frame=crop.parentNode;
-    var FOTOS=[
-      {src:'img/hero-dra.jpg', pos:'50% 40%', size:'cover', label:'Dra. Beatriz Dias de perfil, com o traço do B da marca'},
-      {src:'img/dra-reel-poster.jpg', pos:'50% 30%', size:'cover', label:'Dra. Beatriz na BD Clinic'},
-      {src:'img/dra-foto.webp', pos:'50% 100%', size:'auto 96%', label:'Dra. Beatriz Dias de vestido branco'},
-      {src:'img/labios.jpg', pos:'50% 50%', size:'cover', label:'Preenchimento labial do natural aos 4 ml'}
-    ];
-    FOTOS.forEach(function(f){ var i=new Image(); i.src=f.src; });
-    var k=0, busy=false, onScreen=true;
-    new IntersectionObserver(function(es){ onScreen=es[0].isIntersecting; }).observe(frame);
-    function show(f){ crop.style.backgroundImage='url("'+f.src+'")'; crop.style.backgroundPosition=f.pos; crop.style.backgroundSize=f.size; frame.setAttribute('aria-label',f.label); }
-    function next(){
-      if(busy||!onScreen||document.hidden) return; busy=true;
-      k=(k+1)%FOTOS.length;
-      frame.classList.add('shut'); crop.classList.add('closed');
-      setTimeout(function(){
-        show(FOTOS[k]); crop.classList.add('opening');
-        setTimeout(function(){ crop.classList.remove('closed'); frame.classList.remove('shut'); },140);
-        setTimeout(function(){ crop.classList.remove('opening'); busy=false; },1500);
-      },820);
-    }
-    setTimeout(function(){ setInterval(next,5200); },3200);
   })();
 
   /* ---- logo stroke: draws itself along the line, then a light glides along it ---- */
