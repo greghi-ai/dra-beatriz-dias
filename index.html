@@ -62,7 +62,8 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 
 /* doctor chip in hero */
 .doc-chip{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:6px 18px 6px 6px;text-decoration:none;color:#3A2A1C}
-.doc-chip .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(140deg,#B9767E,#3A2A1C);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-style:italic;font-size:18px;border:2px solid #fff}
+.doc-chip .av{overflow:hidden;width:44px;height:44px;border-radius:50%;background:linear-gradient(140deg,#B9767E,#3A2A1C);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-style:italic;font-size:18px;border:2px solid #fff}
+.doc-chip .av img{width:100%;height:100%;object-fit:cover}
 .doc-chip b{display:block;font-size:14px;font-weight:600}
 .doc-chip small{display:block;font-size:12px;color:#7D6A57}
 
@@ -143,6 +144,8 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 /* doctor teaser + instagram */
 .doc-teaser{display:grid;gap:36px;align-items:center}
 @media (min-width:900px){.doc-teaser{grid-template-columns:320px 1fr;gap:64px}}
+.pz-arch{border-radius:220px 220px 18px 18px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(80% 70% at 50% 40%,#F7EFE5,#E9DCCB)}
+.pz-arch img{width:88%;height:auto;max-width:100%;display:block}
 .doc-teaser .portrait{border-radius:200px 200px 16px 16px}
 .ig-strip{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;padding:20px 24px;border-radius:20px;border:1px solid var(--line);background:var(--bg)}
 .ig-strip b{font-size:16px}
@@ -213,6 +216,31 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .stat-pills div{border-radius:20px;padding:16px 20px;text-align:center}
 .stat-pills strong{display:block;font-family:var(--f-display);font-size:22px;font-weight:400}
 .stat-pills span{font-size:12px;color:var(--muted)}
+
+
+/* "Prazer" — editorial intro with cutout portrait and B monogram arcs */
+.prazer{position:relative;overflow:hidden;padding-block:0;background:radial-gradient(70% 90% at 25% 60%,#F7EFE5 0%,transparent 70%),linear-gradient(160deg,#F2E9DE,#E9DCCB)}
+.pz-grid{display:grid;gap:0;align-items:end}
+@media (min-width:900px){.pz-grid{grid-template-columns:1.05fr .95fr;min-height:760px}}
+.pz-photo{position:relative;height:clamp(440px,64vw,760px);display:flex;align-items:flex-end;justify-content:center;min-width:0}
+.pz-photo > img{position:relative;z-index:2;height:92%;width:auto;max-width:100%;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 24px 40px rgba(120,84,40,.16))}
+.pz-arcs{position:absolute;left:50%;bottom:-2%;height:112%;width:auto;aspect-ratio:600/760;max-width:none;transform:translateX(-54%);z-index:1;overflow:visible}
+.pz-arcs path{fill:none;stroke:#FFFDF9;stroke-width:14;stroke-linecap:round;opacity:.9}
+.pz-arcs path.thin{stroke-width:3;opacity:.7}
+.pz-front{z-index:3;pointer-events:none}
+.pz-text{padding-block:64px 72px;align-self:center;display:grid;gap:14px;justify-items:start;min-width:0}
+.pz-handle{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#3A2A1C}
+.pz-handle img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #FFFDF9}
+.pz-handle b{display:block;font-size:14px;font-weight:600}
+.pz-handle small{display:block;font-size:12px;color:#7D6A57}
+.pz-title{font-family:var(--f-display);font-weight:400;text-transform:uppercase;color:#4A3524;font-size:clamp(56px,7.6vw,112px);line-height:.88;letter-spacing:-.015em;margin-top:6px}
+.pz-hello{font-family:var(--f-campaign);font-weight:300;font-size:clamp(24px,2.6vw,32px);color:#3A2A1C}
+.pz-quote{font-family:var(--f-display);font-style:italic;font-size:clamp(19px,1.8vw,22px);line-height:1.4;color:#5A4632;max-width:36ch;border-left:2px solid #B8893F;padding-left:18px;margin-top:6px}
+.pz-meta{font-family:var(--f-campaign);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#7D6A57}
+.pz-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:8px}
+.pz-link{font-family:var(--f-campaign);font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#3A2A1C}
+.pz-link b{font-weight:600}
+@media (max-width:899px){.pz-text{padding-block:8px 64px}.pz-photo{margin-top:40px;overflow:hidden}.pz-photo > img{-webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent);mask-image:linear-gradient(to bottom,#000 78%,transparent)}}
 
 /* ---------- MOTION ---------- */
 .big-title .ln{display:block;overflow:hidden;padding-bottom:.04em}
@@ -485,7 +513,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
         <a class="disc wa-link" href="#" target="_blank" rel="noopener">Agendar</a>
       </div>
       <div class="hero2-left">
-        <a class="doc-chip" href="#sobre"><span class="av">B</span><span><b>Dra. Beatriz Dias</b><small>Cirurgiã-dentista · CROSP 150757</small></span></a>
+        <a class="doc-chip" href="#sobre"><span class="av"><img src="img/dra-avatar.jpg" alt="" width="44" height="44"></span><span><b>Dra. Beatriz Dias</b><small>Cirurgiã-dentista · CROSP 150757</small></span></a>
         <p class="intro">Harmonização orofacial planejada a partir das proporções do seu rosto, para realçar o que já é seu. Praia Grande · SP.</p>
         <div class="pills">
           <a class="pill" href="#procedimentos">Procedimentos</a>
@@ -573,17 +601,27 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     </div>
   </section>
 
-  <section>
-    <div class="wrap doc-teaser">
-      <div class="portrait"><span>[ foto da Dra. Beatriz<br>vertical, fundo claro ]</span></div>
-      <div>
-        <p class="eyebrow">Quem vai cuidar de você</p>
-        <h2 style="margin-top:14px">Dra. Beatriz Dias</h2>
-        <blockquote>Gosto quando a paciente se olha no espelho e se reconhece, só que mais descansada e mais confiante.</blockquote>
-        <a class="btn btn-ghost" href="#sobre">Conhecer a Dra. Beatriz</a>
-        <div class="ig-strip">
-          <div><b>@drabibia</b><span>Mais de 5 mil pessoas acompanham os bastidores no Instagram</span></div>
-          <a class="btn btn-primary" href="https://www.instagram.com/drabibia/" target="_blank" rel="noopener">Seguir no Instagram</a>
+  <section class="prazer" id="prazer">
+    <div class="wrap pz-grid">
+      <div class="pz-photo">
+          <svg class="pz-arcs" viewBox="0 0 600 760" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+            <path d="M170 -20 V780" /><path d="M170 30 C520 20 560 360 180 372" /><path d="M180 372 C620 380 620 760 150 770" />
+            <path class="thin" d="M40 120 C-60 420 120 720 420 760" />
+          </svg>
+          <img src="img/dra-beatriz.webp" alt="Dra. Beatriz Dias, de vestido branco, com a mão no rosto" width="794" height="1286" loading="lazy">
+          <svg class="pz-arcs pz-front" viewBox="0 0 600 760" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+            <path d="M408 470 C520 560 500 720 300 768" />
+          </svg>
+      </div>
+      <div class="pz-text">
+        <a class="pz-handle" href="https://www.instagram.com/drabibia/" target="_blank" rel="noopener"><img src="img/dra-avatar.jpg" alt="" width="40" height="40"><span><b>Beatriz Dias</b><small>@drabibia</small></span></a>
+        <h2 class="pz-title">Dra.<br>Beatriz<br>Dias,</h2>
+        <p class="pz-hello">Prazer!</p>
+        <p class="pz-quote">Gosto quando a paciente se olha no espelho e se reconhece, só que mais descansada e mais confiante.</p>
+        <p class="pz-meta">Cirurgiã-dentista · CROSP 150757 · Praia Grande</p>
+        <div class="pz-actions">
+          <a class="btn btn-primary" href="#sobre">Conhecer minha história</a>
+          <a class="pz-link" href="https://www.instagram.com/drabibia/" target="_blank" rel="noopener"><b>Seguir</b> no Instagram →</a>
         </div>
       </div>
     </div>
@@ -677,7 +715,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   </div></header>
   <section>
     <div class="wrap about-grid">
-      <div class="portrait"><span>[ foto profissional da Dra. Beatriz<br>formato vertical 3:4 ]</span></div>
+      <div class="portrait pz-arch"><img src="img/dra-beatriz.webp" alt="Dra. Beatriz Dias" width="794" height="1286" loading="lazy"></div>
       <div>
         <p class="eyebrow">Quem vai cuidar de você</p>
         <blockquote>Gosto quando a paciente se olha no espelho e se reconhece, só que mais descansada e mais confiante.</blockquote>
@@ -908,7 +946,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   if('IntersectionObserver' in window){
     document.documentElement.classList.add('js');
     if(!reduce) document.documentElement.classList.add('js-full');
-    var sel='.sec-head,.area-card,.proc,.step,.principles > div,.volume > *,.doc-teaser > *,.ba,.quote,details,.final .wrap > *,.split-wrap > *,.manifesto-grid > .sec-head,.about-grid > *,.clinic-grid > *,.results,.ig-strip';
+    var sel='.sec-head,.area-card,.proc,.step,.principles > div,.volume > *,.doc-teaser > *,.pz-text > *,.pz-photo,.ba,.quote,details,.final .wrap > *,.split-wrap > *,.manifesto-grid > .sec-head,.about-grid > *,.clinic-grid > *,.results,.ig-strip';
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
     document.querySelectorAll(sel).forEach(function(el){
       if(el.closest('.hero2'))return;
@@ -930,7 +968,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
 
     /* headings: word-by-word rise */
     document.querySelectorAll('main h2').forEach(function(h){
-      if(h.closest('.hero2')||h.closest('.cta-card'))return;
+      if(h.closest('.hero2')||h.closest('.cta-card')||h.classList.contains('pz-title'))return;
       var frag=document.createDocumentFragment(), i=0;
       [].slice.call(h.childNodes).forEach(function(n){
         if(n.nodeType===3){
