@@ -79,7 +79,7 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 /* lip volume selector */
 .volume{display:grid;gap:40px;align-items:center}
 @media (min-width:980px){.volume{grid-template-columns:.9fr 1.1fr;gap:72px}}
-@media (max-width:979px){.js-full .vol-scroll .volume{gap:20px}.js-full .vol-scroll .volume > :last-child{order:-1}.js-full .vol-scroll .vol-sticky{padding-block:84px 24px}.js-full .vol-scroll .lead{font-size:15px}}
+@media (max-width:979px){.js .vol-scroll .volume{gap:20px}.js .vol-scroll .volume > :last-child{order:-1}.js .vol-scroll .vol-sticky{padding-block:84px 24px}.js .vol-scroll .lead{font-size:15px}}
 .vol-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .vol-btns button{font-family:var(--f-campaign);font-size:15px;padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
 .vol-btns button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -89,6 +89,7 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .vol-note{font-size:12px;color:var(--muted);margin-top:12px}
 .vol-ml{position:absolute;right:18px;bottom:6px;font-family:var(--f-campaign);font-weight:200;font-size:clamp(56px,8vw,96px);line-height:1;color:rgba(255,255,255,.9);text-shadow:0 2px 20px rgba(58,24,34,.3)}
 .vol-ml::after{content:"ml";font-size:.35em;margin-left:4px}
+.vol-ml:empty::after{content:none}
 .vol-track{position:relative;height:3px;border-radius:3px;background:var(--line);margin-top:18px;display:flex;justify-content:space-between}
 .vol-track i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);border-radius:3px;transition:width .2s linear}
 .vol-track span{position:relative;width:9px;height:9px;margin-top:-3px;border-radius:50%;background:var(--bg);border:1.5px solid var(--accent)}
@@ -115,9 +116,9 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 
 /* scroll-pinned lips + word reveals */
 @media all{
-  .js-full .vol-scroll{height:340vh;padding-block:0}
-  .js-full .vol-scroll .vol-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding-block:96px 40px}
-  .js-full .vol-scroll .vol-sticky > .wrap{width:100%}
+  .js .vol-scroll{height:340vh;padding-block:0}
+  .js .vol-scroll .vol-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding-block:96px 40px}
+  .js .vol-scroll .vol-sticky > .wrap{width:100%}
   .js-full .ticker-track{animation:none}
   .js h2.wsplit .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
   .js h2.wsplit .w > span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
@@ -821,7 +822,7 @@ footer{background:#2A1219;color:rgba(255,255,255,.7);padding-block:56px calc(100
     vbtns.forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.row===r?'true':'false')});
     vview.style.backgroundPosition='100% '+(r*25)+'%';
     vview.classList.remove('swap'); void vview.offsetWidth; vview.classList.add('swap');
-    vtag.textContent=VOL[r][0]; vdesc.textContent=VOL[r][1]; vml.textContent=r;
+    vtag.textContent=VOL[r][0]; vdesc.textContent=VOL[r][1]; vml.textContent=r?r:'';
     vview.setAttribute('aria-label','Lábios com '+VOL[r][0]);
     if(progress==null) vbar.style.width=(r*25)+'%';
   }
@@ -829,7 +830,7 @@ footer{background:#2A1219;color:rgba(255,255,255,.7);padding-block:56px calc(100
   vbtns.forEach(function(btn){
     btn.addEventListener('click',function(){
       var r=+btn.dataset.row;
-      if(document.documentElement.classList.contains('js-full') && volSec.offsetHeight>window.innerHeight*1.5){
+      if(document.documentElement.classList.contains('js') && volSec.offsetHeight>window.innerHeight*1.5){
         var top=volSec.getBoundingClientRect().top+window.scrollY, range=volSec.offsetHeight-window.innerHeight;
         window.scrollTo({top:top+range*((r+.5)/5),behavior:'smooth'});
       }
