@@ -85,7 +85,8 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .vol-stage{position:relative}
 .vol-view{background-image:none!important;background-color:#EEDCD1}
 .lip-inflate{position:absolute;inset:0;transform-origin:50% 55%;will-change:transform}
-.lip-layer{position:absolute;inset:0;background-image:url("img/labios.jpg");background-size:174.2% auto;background-position:100% calc(var(--row) * 25%);opacity:0}
+.lip-layer{position:absolute;inset:0;background-size:cover;background-position:50% 50%;opacity:0}
+.lip-layer:nth-child(1){background-image:url("img/labio-0.jpg")}.lip-layer:nth-child(2){background-image:url("img/labio-1.jpg")}.lip-layer:nth-child(3){background-image:url("img/labio-2.jpg")}.lip-layer:nth-child(4){background-image:url("img/labio-3.jpg")}.lip-layer:nth-child(5){background-image:url("img/labio-4.jpg")}
 .lip-layer:first-child{opacity:1}
 @keyframes balloon{0%{transform:scale(1,1)}25%{transform:scale(1.07,.95)}50%{transform:scale(.97,1.04)}75%{transform:scale(1.02,.99)}100%{transform:scale(1,1)}}
 @keyframes deflate{0%{transform:scale(1.04,.97)}40%{transform:scale(.94,1.03)}70%{transform:scale(1.02,.99)}100%{transform:scale(1)}}
@@ -1006,7 +1007,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     if(!holding) return;
     var dt=Math.min(.05,(t-lastT)/1000); lastT=t; held+=dt;
     var before=Math.floor(level);
-    draw(level+dt*(0.55+held*0.9));          /* speeds up the longer you hold */
+    draw(level+dt*Math.min(0.75,0.28+held*0.12));   /* slow, gentle fill that speeds up a little the longer you hold */
     if(Math.floor(level)>before) bounce('pop');
     if(level>=MAX){ holding=false; pump.classList.remove('holding'); bounce('pop'); return; }
     anim=requestAnimationFrame(holdLoop);
@@ -1016,7 +1017,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     e.preventDefault(); pump.classList.add('used');
     try{pump.setPointerCapture(e.pointerId)}catch(err){}
     downAt=performance.now();
-    if(level>=MAX-0.001){ animateTo(0,700); bounce('deflate'); return; }
+    if(level>=MAX-0.001){ animateTo(0,1400); bounce('deflate'); return; }
     holding=true; held=0; lastT=downAt; pump.classList.add('holding');
     cancelAnimationFrame(anim); anim=requestAnimationFrame(holdLoop);
   }
@@ -1025,7 +1026,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     holding=false; pump.classList.remove('holding'); cancelAnimationFrame(anim);
     var quick=performance.now()-downAt<220;
     var target= quick ? Math.min(MAX,Math.floor(level)+1) : Math.min(MAX,Math.round(level));
-    animateTo(target,quick?420:260,function(){ bounce('pop'); });
+    animateTo(target,quick?900:450,function(){ bounce('pop'); });
   }
   pump.addEventListener('pointerdown',press);
   pump.addEventListener('pointerup',release);
@@ -1034,8 +1035,8 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   pump.addEventListener('contextmenu',function(e){e.preventDefault()});
   pump.addEventListener('keydown',function(e){
     if(e.key!==' '&&e.key!=='Enter') return; e.preventDefault(); pump.classList.add('used');
-    if(level>=MAX-0.001){ animateTo(0,700); bounce('deflate'); }
-    else animateTo(Math.min(MAX,Math.floor(level)+1),420,function(){ bounce('pop'); });
+    if(level>=MAX-0.001){ animateTo(0,1400); bounce('deflate'); }
+    else animateTo(Math.min(MAX,Math.floor(level)+1),900,function(){ bounce('pop'); });
   });
   draw(0);
 
