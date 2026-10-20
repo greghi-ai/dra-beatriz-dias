@@ -86,7 +86,8 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .vol-view{background-image:none!important;background-color:#EEDCD1}
 .lip-inflate{position:absolute;inset:0;transform-origin:50% 55%;will-change:transform}
 .lip-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;opacity:0;transition:opacity .4s;pointer-events:none}
-.vol-view.has-video .lip-video{opacity:1}
+.vol-view.has-video{aspect-ratio:1344/768}
+.vol-view.has-video .lip-video{opacity:1;object-position:50% 50%}
 .vol-view.has-video .lip-layer{visibility:hidden}
 .lip-layer{position:absolute;inset:0;background-size:cover;background-position:50% 50%;opacity:0}
 .lip-layer:nth-child(1){background-image:url("img/labio-0.jpg")}.lip-layer:nth-child(2){background-image:url("img/labio-1.jpg")}.lip-layer:nth-child(3){background-image:url("img/labio-2.jpg")}.lip-layer:nth-child(4){background-image:url("img/labio-3.jpg")}.lip-layer:nth-child(5){background-image:url("img/labio-4.jpg")}
