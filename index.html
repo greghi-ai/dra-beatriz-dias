@@ -79,19 +79,43 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 /* lip volume selector */
 .volume{display:grid;gap:40px;align-items:center}
 @media (min-width:980px){.volume{grid-template-columns:.9fr 1.1fr;gap:72px}}
-@media (max-width:979px){.js .vol-scroll .volume{gap:20px}.js .vol-scroll .volume > :last-child{order:-1}.js .vol-scroll .vol-sticky{padding-block:84px 24px}.js .vol-scroll .lead{font-size:15px}}
+@media (max-width:979px){.volume > :last-child{order:-1}}
 .vol-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .vol-btns button{font-family:var(--f-campaign);font-size:15px;padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .2s,color .2s}
 .vol-btns button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .vol-view{position:relative;aspect-ratio:620/266;max-width:100%;border-radius:20px;overflow:hidden;background-image:url("img/labios.jpg");background-size:174.2% auto;background-position:100% 0%;transition:background-position .45s cubic-bezier(.6,0,.2,1);box-shadow:0 24px 60px rgba(94,36,52,.18)}
+.vol-stage{position:relative}
+.vol-view{background-image:none!important;background-color:#B98A7C}
+.lip-inflate{position:absolute;inset:0;transform-origin:50% 55%;will-change:transform}
+.lip-layer{position:absolute;inset:0;background-image:url("img/labios.jpg");background-size:174.2% auto;background-position:100% calc(var(--row) * 25%);opacity:0}
+.lip-layer:first-child{opacity:1}
+.lip-gloss{position:absolute;left:50%;top:52%;width:46%;height:40%;transform:translate(-50%,-50%) scale(.6);border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.55),rgba(255,255,255,0));opacity:0;pointer-events:none;mix-blend-mode:soft-light}
+.vol-view.pop .lip-inflate{animation:balloon .75s cubic-bezier(.3,1.7,.5,1)}
+.vol-view.pop .lip-gloss{animation:gloss .7s ease-out}
+.vol-view.deflate .lip-inflate{animation:deflate .6s cubic-bezier(.4,0,.2,1.4)}
+@keyframes balloon{0%{transform:scale(1,1)}25%{transform:scale(1.07,.95)}50%{transform:scale(.97,1.04)}75%{transform:scale(1.02,.99)}100%{transform:scale(1,1)}}
+@keyframes deflate{0%{transform:scale(1.04,.97)}40%{transform:scale(.94,1.03)}70%{transform:scale(1.02,.99)}100%{transform:scale(1)}}
+@keyframes gloss{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.3)}}
+.pump{position:absolute;right:-22px;bottom:-30px;width:104px;height:104px;border-radius:50%;border:0;padding:0;background:transparent;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;z-index:3}
+.pump-ring{position:absolute;inset:0;transform:rotate(-90deg)}
+.pump-track{fill:none;stroke:rgba(255,255,255,.35);stroke-width:4}
+.pump-fill{fill:none;stroke:#E6C79A;stroke-width:4;stroke-linecap:round;stroke-dasharray:289;stroke-dashoffset:289}
+.pump-core{position:absolute;inset:8px;border-radius:50%;background:#3A1822;color:#F2E1DC;display:grid;place-items:center;align-content:center;gap:2px;box-shadow:0 14px 34px rgba(58,24,34,.35);transition:transform .15s ease}
+.pump-core svg{width:22px;height:22px;color:#D98C9E}
+.pump-core b{font-family:var(--f-campaign);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.pump.holding .pump-core{transform:scale(.92)}
+.pump.full .pump-core{background:#97455A}
+.pump:not(.used) .pump-core{animation:nudge 2.4s ease-in-out infinite}
+@keyframes nudge{0%,70%,100%{box-shadow:0 14px 34px rgba(58,24,34,.35),0 0 0 0 rgba(217,140,158,.5)}85%{box-shadow:0 14px 34px rgba(58,24,34,.35),0 0 0 14px rgba(217,140,158,0)}}
+@media (max-width:640px){.pump{right:-6px;bottom:-26px;width:88px;height:88px}}
 .vol-view .tag{position:absolute;left:16px;top:16px;background:rgba(255,255,255,.85);color:#3A1822;border-radius:999px;padding:6px 14px;font-family:var(--f-campaign);font-size:14px;font-weight:500}
 .vol-desc{min-height:3.3em;color:var(--muted);font-size:16px;max-width:46ch}
 .vol-note{font-size:12px;color:var(--muted);margin-top:12px}
-.vol-ml{position:absolute;right:18px;bottom:6px;font-family:var(--f-campaign);font-weight:200;font-size:clamp(56px,8vw,96px);line-height:1;color:rgba(255,255,255,.9);text-shadow:0 2px 20px rgba(58,24,34,.3)}
+.vol-ml{position:absolute;left:20px;bottom:6px;font-family:var(--f-campaign);font-weight:200;font-size:clamp(56px,8vw,96px);line-height:1;color:rgba(255,255,255,.9);text-shadow:0 2px 20px rgba(58,24,34,.3)}
 .vol-ml::after{content:"ml";font-size:.35em;margin-left:4px}
 .vol-ml:empty::after{content:none}
-.vol-track{position:relative;height:3px;border-radius:3px;background:var(--line);margin-top:18px;display:flex;justify-content:space-between}
-.vol-track i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);border-radius:3px;transition:width .2s linear}
+.vol-track{position:relative;height:3px;border-radius:3px;background:var(--line);margin-top:40px;margin-right:96px;display:flex;justify-content:space-between}
+.vol-track i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);border-radius:3px}
 .vol-track span{position:relative;width:9px;height:9px;margin-top:-3px;border-radius:50%;background:var(--bg);border:1.5px solid var(--accent)}
 
 /* loader, curtain, cursor */
@@ -116,9 +140,6 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 
 /* scroll-pinned lips + word reveals */
 @media all{
-  .js .vol-scroll{height:340vh;padding-block:0}
-  .js .vol-scroll .vol-sticky{position:sticky;top:0;min-height:100vh;display:flex;align-items:center;padding-block:96px 40px}
-  .js .vol-scroll .vol-sticky > .wrap{width:100%}
   .js-full .ticker-track{animation:none}
   .js h2.wsplit .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
   .js h2.wsplit .w > span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
@@ -225,7 +246,6 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
   .area:not([hidden]){animation:areaIn .55s ease both}
   .area-banner h1{animation:fadeUp .9s .1s cubic-bezier(.2,.7,.2,1) both}
   .area-banner p{animation:fadeUp .9s .25s cubic-bezier(.2,.7,.2,1) both}
-  .vol-view.swap .tag{animation:fadeUp .4s both}
   .js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
   .js .rv.in{opacity:1;transform:none}
   .btn-primary{position:relative;overflow:hidden}
@@ -501,7 +521,7 @@ footer{background:#2A1219;color:rgba(255,255,255,.7);padding-block:56px calc(100
       <div style="display:grid;gap:16px">
         <p class="eyebrow">Preenchimento labial</p>
         <h2>Você escolhe <em class="serif">até onde ir</em></h2>
-        <p class="lead">Role a página ou toque em cada volume para ver a diferença. Na avaliação, a Dra. Beatriz indica a quantidade que respeita a proporção do seu rosto.</p>
+        <p class="lead">Segure o botão e veja o lábio encher, ou toque em cada volume para comparar. Na avaliação, a Dra. Beatriz indica a quantidade que respeita a proporção do seu rosto.</p>
         <div class="vol-btns" role="group" aria-label="Volume de preenchimento">
           <button type="button" data-row="0" aria-pressed="true">Natural</button>
           <button type="button" data-row="1" aria-pressed="false">1 ml</button>
@@ -513,7 +533,19 @@ footer{background:#2A1219;color:rgba(255,255,255,.7);padding-block:56px calc(100
         <a class="btn btn-primary wa-link" data-msg="Olá! Vi a comparação de volumes no site e quero avaliar meus lábios." href="#" target="_blank" rel="noopener" style="justify-self:start"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#wa-icon"/></svg>Avaliar meus lábios</a>
       </div>
       <div>
-        <div class="vol-view" id="vol-view" role="img" aria-label="Lábios em volume natural"><span class="tag" id="vol-tag">Natural</span><span class="vol-ml" id="vol-ml" aria-hidden="true">0</span></div>
+        <div class="vol-stage">
+          <div class="vol-view" id="vol-view" role="img" aria-label="Lábios em volume natural">
+            <div class="lip-inflate" id="lip-inflate">
+              <div class="lip-layer" style="--row:0"></div><div class="lip-layer" style="--row:1"></div><div class="lip-layer" style="--row:2"></div><div class="lip-layer" style="--row:3"></div><div class="lip-layer" style="--row:4"></div>
+            </div>
+            <span class="lip-gloss" id="lip-gloss" aria-hidden="true"></span>
+            <span class="tag" id="vol-tag">Natural</span><span class="vol-ml" id="vol-ml" aria-hidden="true"></span>
+          </div>
+          <button type="button" class="pump" id="pump" aria-label="Segure para preencher o lábio">
+            <svg class="pump-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" class="pump-track"/><circle cx="50" cy="50" r="46" class="pump-fill" id="pump-fill"/></svg>
+            <span class="pump-core"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c-3.6 4.6-6.5 8.4-6.5 11.6a6.5 6.5 0 0 0 13 0C18.5 10.9 15.6 7.1 12 2.5Z" fill="currentColor"/></svg><b id="pump-label">Segure</b></span>
+          </button>
+        </div>
         <div class="vol-track" aria-hidden="true"><i id="vol-bar"></i><span></span><span></span><span></span><span></span><span></span></div>
         <p class="vol-note">Imagem ilustrativa. A quantidade indicada depende da avaliação individual.</p>
       </div>
@@ -815,29 +847,82 @@ footer{background:#2A1219;color:rgba(255,255,255,.7);padding-block:56px calc(100
     ['4 ml','Volume mais evidente, geralmente alcançado em etapas e com reavaliação entre elas.']
   ];
   var vview=document.getElementById('vol-view'), vtag=document.getElementById('vol-tag'), vdesc=document.getElementById('vol-desc');
-  var vbtns=[].slice.call(document.querySelectorAll('.vol-btns button')), vml=document.getElementById('vol-ml'), vbar=document.getElementById('vol-bar'), curRow=-1;
-  function setRow(r,progress){
-    if(progress!=null) vbar.style.width=(progress*100)+'%';
-    if(r===curRow) return; curRow=r;
-    vbtns.forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.row===r?'true':'false')});
-    vview.style.backgroundPosition='100% '+(r*25)+'%';
-    vview.classList.remove('swap'); void vview.offsetWidth; vview.classList.add('swap');
-    vtag.textContent=VOL[r][0]; vdesc.textContent=VOL[r][1]; vml.textContent=r?r:'';
-    vview.setAttribute('aria-label','Lábios com '+VOL[r][0]);
-    if(progress==null) vbar.style.width=(r*25)+'%';
+  var vbtns=[].slice.call(document.querySelectorAll('.vol-btns button')), vml=document.getElementById('vol-ml'), vbar=document.getElementById('vol-bar');
+  var layers=[].slice.call(document.querySelectorAll('.lip-layer')), inflate=document.getElementById('lip-inflate');
+  var pump=document.getElementById('pump'), pumpFill=document.getElementById('pump-fill'), pumpLabel=document.getElementById('pump-label');
+  var level=0, curRow=-1, MAX=4;
+  /* draw a continuous level 0..4: each layer fades in on top of the previous one */
+  function draw(v){
+    level=Math.max(0,Math.min(MAX,v));
+    layers.forEach(function(l,i){ if(i>0) l.style.opacity=Math.max(0,Math.min(1,level-(i-1))); });
+    inflate.style.transform='scale('+(1+level*.012)+')';
+    vbar.style.width=(level/MAX*100)+'%';
+    pumpFill.style.strokeDashoffset=289*(1-level/MAX);
+    vml.textContent = level<0.05 ? '' : (Math.abs(level-Math.round(level))<0.05 ? String(Math.round(level)) : level.toFixed(1).replace('.',','));
+    var r=Math.round(level);
+    if(r!==curRow){
+      curRow=r;
+      vbtns.forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.row===r?'true':'false')});
+      vtag.textContent=VOL[r][0]; vdesc.textContent=VOL[r][1];
+      vview.setAttribute('aria-label','Lábios com '+VOL[r][0]);
+    }
+    var full=level>=MAX-0.001;
+    pump.classList.toggle('full',full);
+    pumpLabel.textContent= full ? 'Esvaziar' : 'Segure';
+    pump.setAttribute('aria-label', full ? 'Esvaziar o lábio' : 'Segure para preencher o lábio');
   }
-  var volSec=document.getElementById('vol-scroll');
+  function bounce(cls){ vview.classList.remove('pop','deflate'); void vview.offsetWidth; vview.classList.add(cls); try{navigator.vibrate&&navigator.vibrate(cls==='pop'?12:[8,30,8])}catch(e){} }
+  var anim=null;
+  function animateTo(target,dur,cb){
+    cancelAnimationFrame(anim); var from=level, t0=performance.now();
+    (function step(t){ var k=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-k,3); draw(from+(target-from)*e); if(k<1) anim=requestAnimationFrame(step); else if(cb) cb(); })(t0);
+  }
   vbtns.forEach(function(btn){
     btn.addEventListener('click',function(){
-      var r=+btn.dataset.row;
-      if(document.documentElement.classList.contains('js') && volSec.offsetHeight>window.innerHeight*1.5){
-        var top=volSec.getBoundingClientRect().top+window.scrollY, range=volSec.offsetHeight-window.innerHeight;
-        window.scrollTo({top:top+range*((r+.5)/5),behavior:'smooth'});
-      }
-      setRow(r);
+      var r=+btn.dataset.row; pump.classList.add('used');
+      animateTo(r,500,function(){ bounce(r<level?'deflate':'pop'); });
+      if(r<level) bounce('deflate');
     });
   });
-  setRow(0);
+  /* pump: hold to inflate continuously, tap for +1 ml, at 4 ml it empties */
+  var holding=false, held=0, lastT=0, downAt=0;
+  function holdLoop(t){
+    if(!holding) return;
+    var dt=Math.min(.05,(t-lastT)/1000); lastT=t; held+=dt;
+    var before=Math.floor(level);
+    draw(level+dt*(0.55+held*0.9));          /* speeds up the longer you hold */
+    inflate.style.transform='scale('+(1+level*.012+Math.sin(t/60)*.004)+')'; /* tiny pressure tremble */
+    if(Math.floor(level)>before) bounce('pop');
+    if(level>=MAX){ holding=false; pump.classList.remove('holding'); bounce('pop'); return; }
+    anim=requestAnimationFrame(holdLoop);
+  }
+  function press(e){
+    if(e.button!=null && e.button!==0) return;
+    e.preventDefault(); pump.classList.add('used');
+    try{pump.setPointerCapture(e.pointerId)}catch(err){}
+    downAt=performance.now();
+    if(level>=MAX-0.001){ animateTo(0,700); bounce('deflate'); return; }
+    holding=true; held=0; lastT=downAt; pump.classList.add('holding');
+    cancelAnimationFrame(anim); anim=requestAnimationFrame(holdLoop);
+  }
+  function release(){
+    if(!holding) return;
+    holding=false; pump.classList.remove('holding'); cancelAnimationFrame(anim);
+    var quick=performance.now()-downAt<220;
+    var target= quick ? Math.min(MAX,Math.floor(level)+1) : Math.min(MAX,Math.round(level));
+    animateTo(target,quick?420:260,function(){ bounce('pop'); });
+  }
+  pump.addEventListener('pointerdown',press);
+  pump.addEventListener('pointerup',release);
+  pump.addEventListener('pointercancel',release);
+  pump.addEventListener('lostpointercapture',release);
+  pump.addEventListener('contextmenu',function(e){e.preventDefault()});
+  pump.addEventListener('keydown',function(e){
+    if(e.key!==' '&&e.key!=='Enter') return; e.preventDefault(); pump.classList.add('used');
+    if(level>=MAX-0.001){ animateTo(0,700); bounce('deflate'); }
+    else animateTo(Math.min(MAX,Math.floor(level)+1),420,function(){ bounce('pop'); });
+  });
+  draw(0);
 
   /* ---- motion ---- */
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -901,13 +986,6 @@ footer{background:#2A1219;color:rgba(255,255,255,.7);padding-block:56px calc(100
         ground.style.marginTop=(y*.3)+'px';
         bigTitle.style.transform='translateY('+(-y*.12)+'px)';
         stage.style.opacity=Math.max(0,1-y/(vh*.9));
-      }
-      if(!volSec.closest('.area').hidden){
-        var r=volSec.getBoundingClientRect(), range=volSec.offsetHeight-vh;
-        if(range>vh*.5){
-          var p=Math.min(1,Math.max(0,-r.top/range));
-          setRow(Math.min(4,Math.floor(p*5)),p);
-        }
       }
     }
     window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
