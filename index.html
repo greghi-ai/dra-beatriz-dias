@@ -146,6 +146,8 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 @media (min-width:900px){.doc-teaser{grid-template-columns:320px 1fr;gap:64px}}
 .pz-arch{border-radius:220px 220px 18px 18px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(80% 70% at 50% 40%,#F7EFE5,#E9DCCB)}
 .pz-arch img{width:88%;height:auto;max-width:100%;display:block}
+.portrait.pz-arch{aspect-ratio:auto;background:none;border:0;border-radius:0;overflow:visible}
+.portrait.pz-arch img{width:100%;filter:drop-shadow(0 24px 40px rgba(120,84,40,.14))}
 .doc-teaser .portrait{border-radius:200px 200px 16px 16px}
 .ig-strip{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;padding:20px 24px;border-radius:20px;border:1px solid var(--line);background:var(--bg)}
 .ig-strip b{font-size:16px}
@@ -223,7 +225,7 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .pz-grid{display:grid;gap:0;align-items:end}
 @media (min-width:900px){.pz-grid{grid-template-columns:1.05fr .95fr;min-height:760px}}
 .pz-photo{position:relative;height:clamp(440px,64vw,760px);display:flex;align-items:flex-end;justify-content:center;min-width:0}
-.pz-photo > img{position:relative;z-index:2;height:92%;width:auto;max-width:100%;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 24px 40px rgba(120,84,40,.16))}
+.pz-photo > img{position:relative;z-index:2;height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 24px 40px rgba(120,84,40,.16))}
 .pz-arcs{position:absolute;left:50%;bottom:-2%;height:112%;width:auto;aspect-ratio:600/760;max-width:none;transform:translateX(-54%);z-index:1;overflow:visible}
 .pz-arcs path{fill:none;stroke:#FFFDF9;stroke-width:14;stroke-linecap:round;opacity:.9}
 .pz-arcs path.thin{stroke-width:3;opacity:.7}
@@ -604,14 +606,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   <section class="prazer" id="prazer">
     <div class="wrap pz-grid">
       <div class="pz-photo">
-          <svg class="pz-arcs" viewBox="0 0 600 760" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-            <path d="M170 -20 V780" /><path d="M170 30 C520 20 560 360 180 372" /><path d="M180 372 C620 380 620 760 150 770" />
-            <path class="thin" d="M40 120 C-60 420 120 720 420 760" />
-          </svg>
-          <img src="img/dra-beatriz.webp" alt="Dra. Beatriz Dias, de vestido branco, com a mão no rosto" width="794" height="1286" loading="lazy">
-          <svg class="pz-arcs pz-front" viewBox="0 0 600 760" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-            <path d="M408 470 C520 560 500 720 300 768" />
-          </svg>
+          <img src="img/dra-beatriz-b.webp" alt="Dra. Beatriz Dias, de vestido branco, com a mão no rosto, envolta pelo traço do B da marca" width="1062" height="1306" loading="lazy">
       </div>
       <div class="pz-text">
         <a class="pz-handle" href="https://www.instagram.com/drabibia/" target="_blank" rel="noopener"><img src="img/dra-avatar.jpg" alt="" width="40" height="40"><span><b>Beatriz Dias</b><small>@drabibia</small></span></a>
@@ -715,7 +710,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   </div></header>
   <section>
     <div class="wrap about-grid">
-      <div class="portrait pz-arch"><img src="img/dra-beatriz.webp" alt="Dra. Beatriz Dias" width="794" height="1286" loading="lazy"></div>
+      <div class="portrait pz-arch"><img src="img/dra-beatriz-b.webp" alt="Dra. Beatriz Dias" width="1062" height="1306" loading="lazy"></div>
       <div>
         <p class="eyebrow">Quem vai cuidar de você</p>
         <blockquote>Gosto quando a paciente se olha no espelho e se reconhece, só que mais descansada e mais confiante.</blockquote>
