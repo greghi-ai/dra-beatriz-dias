@@ -275,23 +275,26 @@ em.serif{font-family:var(--f-display);font-style:italic;color:var(--accent)}
 .gal-btn svg{width:18px;height:18px;color:#B8893F}
 .gal-btn small{font-weight:400;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7D6A57;margin-left:2px}
 /* gallery */
-.gal-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
-.gal-filters button{font-family:var(--f-campaign);font-size:15px;padding:10px 22px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
-.gal-filters button[aria-selected="true"]{background:var(--pink);border-color:var(--pink)}
-.gal-grid{columns:3 260px;column-gap:14px}
-.gal-item{break-inside:avoid;margin:0 0 14px;position:relative;border-radius:18px;overflow:hidden;background:var(--surface);border:1px solid var(--line);display:block;width:100%;padding:0;cursor:pointer;text-align:left;color:inherit;font:inherit}
-.gal-item img{display:block;width:100%;height:auto}
-.gal-item .ph{display:grid;place-items:center;text-align:center;color:var(--muted);background:repeating-linear-gradient(135deg,#F7EFE5 0 14px,#FBF6EF 14px 28px);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;padding:16px}
-.gal-item .tag{position:absolute;left:12px;top:12px;font-family:var(--f-campaign);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(255,253,249,.85);color:#3A2A1C}
-.gal-item .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#3A2A1C;background:rgba(255,253,249,.85);box-shadow:0 8px 20px rgba(58,42,28,.2)}
-.gal-item .pl svg{width:20px;height:20px;margin-left:3px}
-.gal-item figcaption{padding:12px 14px;font-size:13px;color:var(--muted)}
-.gal-item[disabled]{cursor:default}
-.gal-item.soon .pl{width:auto;height:auto;padding:8px 14px;border-radius:999px;font-family:var(--f-campaign);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-.gal-item[hidden]{display:none!important}
+.gal-rows{display:grid;gap:14px;overflow:hidden;padding-block:6px 10px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.gal-row{display:flex;gap:14px;width:max-content;animation:galRun var(--dur,60s) linear infinite}
+.gal-row.rev{animation-direction:reverse}
+.gal-rows:hover .gal-row,.gal-rows:focus-within .gal-row{animation-play-state:paused}
+@keyframes galRun{to{transform:translateX(-50%)}}
+.gal-tile{flex:none;height:clamp(150px,17vw,210px);aspect-ratio:var(--ar,1);border-radius:22px;overflow:hidden;border:0;padding:0;cursor:zoom-in;position:relative;
+  background:linear-gradient(150deg,#F7EFE5,#EADCCB);box-shadow:0 10px 26px rgba(120,84,40,.14);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.gal-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gal-tile:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(120,84,40,.22)}
+.gal-tile:hover img{transform:scale(1.06)}
+.gal-tile.ph{cursor:default;display:grid;place-items:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;color:#7D6A57;text-align:center;padding:12px;
+  background:repeating-linear-gradient(135deg,#F7EFE5 0 12px,#FBF6EF 12px 24px)}
+.gal-tile.ph:hover{transform:none}
+@media (prefers-reduced-motion:reduce){.gal-rows{overflow-x:auto}.gal-row{animation-duration:240s}}
 /* lightbox */
 .lightbox{position:fixed;inset:0;z-index:110;background:rgba(30,22,15,.86);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;padding:calc(56px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(56px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .lb-stage{max-width:min(1000px,100%);max-height:100%;display:grid;place-items:center}
+.lb-stage img{animation:lbIn .35s cubic-bezier(.2,.7,.2,1)}
+@keyframes lbIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
 .lb-stage img,.lb-stage video{max-width:100%;max-height:calc(100vh - 160px);border-radius:14px;display:block}
 .lb-close,.lb-nav{position:absolute;border:0;cursor:pointer;color:#FFFDF9;background:rgba(255,253,249,.12);width:46px;height:46px;border-radius:50%;font-size:26px;line-height:1}
 .lb-close{top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px))}
@@ -640,7 +643,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
           <figcaption class="reel-cap"><b>Dra. Beatriz Dias</b><span>Toque para assistir · 25 s</span></figcaption>
           <p class="reel-empty" id="reel-empty" hidden>O vídeo da Dra. entra aqui<br><small>formato 9:16 · arquivo video/dra-beatriz.mp4</small></p>
         </figure>
-        <a class="btn gal-btn" href="#galeria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Galeria <small>fotos e vídeos</small></a>
+        <a class="btn gal-btn" href="#galeria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Galeria <small>de fotos</small></a>
       </div>
     </div>
   </section>
@@ -850,17 +853,12 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
 <!-- ===================== ÁREA 7 · GALERIA ===================== -->
 <div class="area" data-area="galeria" hidden>
   <header class="area-banner"><div class="hero-photo" aria-hidden="true"></div><div class="wrap">
-    <p class="eyebrow">Galeria</p><h1>Fotos e vídeos</h1>
-    <p>Bastidores, resultados e o dia a dia da BD Clinic.</p>
+    <p class="eyebrow">Galeria</p><h1>Fotos</h1>
+    <p>Bastidores, resultados e o dia a dia da BD Clinic. Toque em uma foto para ver maior.</p>
   </div></header>
   <section>
+    <div class="gal-rows" id="gal-rows" aria-label="Fotos da galeria"></div>
     <div class="wrap">
-      <div class="gal-filters" role="tablist" aria-label="Filtrar galeria">
-        <button type="button" role="tab" aria-selected="true" data-f="todos">Tudo</button>
-        <button type="button" role="tab" aria-selected="false" data-f="foto">Fotos</button>
-        <button type="button" role="tab" aria-selected="false" data-f="video">Vídeos</button>
-      </div>
-      <div class="gal-grid" id="gal-grid"></div>
       <p class="legal-note">Imagens de pacientes publicadas com autorização. Os resultados variam de pessoa para pessoa.</p>
     </div>
   </section>
@@ -1043,7 +1041,7 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
   if('IntersectionObserver' in window){
     document.documentElement.classList.add('js');
     if(!reduce) document.documentElement.classList.add('js-full');
-    var sel='.sec-head,.area-card,.proc,.step,.principles > div,.volume > *,.doc-teaser > *,.pz-text > *,.pz-photo,.fala-text > *,.fala-media,.gal-item,.ba,.quote,details,.final .wrap > *,.split-wrap > *,.manifesto-grid > .sec-head,.about-grid > *,.clinic-grid > *,.results,.ig-strip';
+    var sel='.sec-head,.area-card,.proc,.step,.principles > div,.volume > *,.doc-teaser > *,.pz-text > *,.pz-photo,.fala-text > *,.fala-media,.ba,.quote,details,.final .wrap > *,.split-wrap > *,.manifesto-grid > .sec-head,.about-grid > *,.clinic-grid > *,.results,.ig-strip';
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
     document.querySelectorAll(sel).forEach(function(el){
       if(el.closest('.hero2'))return;
@@ -1143,51 +1141,48 @@ footer{background:#F7F0E6;color:rgba(58,42,28,.72);padding-block:56px calc(100px
     v.addEventListener('ended',function(){ reel.classList.remove('playing'); v.controls=false; });
   })();
 
-  /* ---- gallery: edit this list to add photos and videos ---- */
+  /* ---- gallery: photos only. To add one, put the file in img/ and add a line here ---- */
   var GALERIA=[
-    {tipo:'foto',  src:'img/dra-foto.webp', legenda:'Dra. Beatriz Dias'},
-    {tipo:'foto',  src:'img/labios.jpg', legenda:'Preenchimento labial: do natural aos 4 ml (ilustrativo)'},
-    {tipo:'video', src:'video/dra-beatriz.mp4', poster:'img/dra-reel-poster.jpg', legenda:'Recado da Dra. Beatriz'},
-    {tipo:'foto',  vazio:'foto da recepção', legenda:'BD Clinic · recepção', h:300},
-    {tipo:'video', vazio:'vídeo · bastidores do atendimento', legenda:'Bastidores', h:420},
-    {tipo:'foto',  vazio:'antes e depois · lábios', legenda:'Antes e depois (com autorização)', h:260},
-    {tipo:'foto',  vazio:'sala de atendimento', legenda:'Sala de atendimento', h:340},
-    {tipo:'video', vazio:'vídeo · depoimento de paciente', legenda:'Depoimento', h:420},
-    {tipo:'foto',  vazio:'antes e depois · contorno', legenda:'Antes e depois (com autorização)', h:280}
+    {src:'img/dra-foto.webp', legenda:'Dra. Beatriz Dias', pos:'50% 18%', ar:'4/5'},
+    {src:'img/clinica-neon.jpg', legenda:'O letreiro da BD Clinic', ar:'4/5'},
+    {src:'img/dra-reel-poster.jpg', legenda:'Dra. Beatriz na BD Clinic', pos:'50% 35%', ar:'1'},
+    {src:'img/labios.jpg', legenda:'Preenchimento labial: do natural aos 4 ml (ilustrativo)', ar:'4/5'},
+    {vazio:'recepção', ar:'1'},
+    {vazio:'antes e depois · lábios', ar:'4/5'},
+    {vazio:'sala de atendimento', ar:'1'},
+    {vazio:'bastidores', ar:'4/5'},
+    {vazio:'antes e depois · contorno', ar:'1'},
+    {vazio:'detalhes da clínica', ar:'4/5'}
   ];
   (function(){
-    var grid=document.getElementById('gal-grid'); if(!grid) return;
-    var PL='<span class="pl"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>';
-    GALERIA.forEach(function(it,i){
-      var b=document.createElement('button'); b.type='button'; b.className='gal-item'; b.dataset.tipo=it.tipo; b.dataset.i=i;
-      var media = it.vazio ? '<div class="ph" style="height:'+(it.h||300)+'px">[ '+it.vazio+' ]</div>'
-                : it.tipo==='foto' ? '<img src="'+it.src+'" alt="'+it.legenda+'" loading="lazy">'
-                : '<img src="'+(it.poster||'img/dra-reel-poster.jpg')+'" alt="'+it.legenda+'" loading="lazy">'+PL;
-      b.innerHTML=media+'<span class="tag">'+(it.tipo==='foto'?'Foto':'Vídeo')+'</span><figcaption>'+it.legenda+'</figcaption>';
-      if(it.vazio) b.disabled=true;
-      grid.appendChild(b);
-      if(!it.vazio && it.tipo==='video') fetch(it.src,{method:'HEAD'}).then(function(r){ if(!r.ok) throw 0; }).catch(function(){ it.vazio='em breve'; b.disabled=true; b.classList.add('soon'); var pl=b.querySelector('.pl'); if(pl) pl.textContent='Vídeo em breve'; });
-    });
-    [].forEach.call(document.querySelectorAll('.gal-filters button'),function(f){
-      f.addEventListener('click',function(){
-        [].forEach.call(document.querySelectorAll('.gal-filters button'),function(x){x.setAttribute('aria-selected',x===f?'true':'false')});
-        [].forEach.call(grid.children,function(c){ c.hidden = f.dataset.f!=='todos' && c.dataset.tipo!==f.dataset.f; });
+    var rowsEl=document.getElementById('gal-rows'); if(!rowsEl) return;
+    var real=GALERIA.map(function(x,i){return i}).filter(function(i){return !GALERIA[i].vazio});
+    var ROWS=3, PER=10;
+    for(var r=0;r<ROWS;r++){
+      var row=document.createElement('div'); row.className='gal-row'+(r%2?' rev':''); row.style.setProperty('--dur',(70+r*14)+'s');
+      var seq=[]; for(var k=0;k<PER;k++) seq.push((k*ROWS+r*3+k)%GALERIA.length);
+      seq=seq.concat(seq); /* doubled so the loop is seamless */
+      seq.forEach(function(idx,pos){
+        var it=GALERIA[idx], t;
+        if(it.vazio){ t=document.createElement('div'); t.className='gal-tile ph'; t.textContent='[ '+it.vazio+' ]'; t.setAttribute('aria-hidden','true'); }
+        else { t=document.createElement('button'); t.type='button'; t.className='gal-tile'; t.dataset.i=idx; t.setAttribute('aria-label','Ver foto: '+it.legenda);
+          if(pos>=PER){ t.tabIndex=-1; t.setAttribute('aria-hidden','true'); }
+          t.innerHTML='<img src="'+it.src+'" alt="" loading="lazy" style="object-position:'+(it.pos||'50% 50%')+'">'; }
+        t.style.setProperty('--ar',it.ar||'1');
+        row.appendChild(t);
       });
-    });
-    var lb=document.getElementById('lightbox'), stage=document.getElementById('lb-stage'), cap=document.getElementById('lb-cap'), cur=-1, lastFocus=null;
-    function playable(){ return GALERIA.map(function(x,i){return i}).filter(function(i){ var c=grid.children[i]; return !GALERIA[i].vazio && !c.hidden; }); }
-    function open(i){
-      cur=i; var it=GALERIA[i];
-      stage.innerHTML = it.tipo==='foto' ? '<img src="'+it.src+'" alt="'+it.legenda+'">' : '<video src="'+it.src+'" controls playsinline autoplay poster="'+(it.poster||'')+'"></video>';
-      cap.textContent=it.legenda; lb.hidden=false; document.body.style.overflow='hidden'; document.getElementById('lb-close').focus();
+      rowsEl.appendChild(row);
     }
+    var lb=document.getElementById('lightbox'), stage=document.getElementById('lb-stage'), cap=document.getElementById('lb-cap'), cur=-1, lastFocus=null;
+    function open(i){ cur=i; var it=GALERIA[i]; stage.innerHTML='<img src="'+it.src+'" alt="'+it.legenda+'">'; cap.textContent=it.legenda;
+      lb.hidden=false; document.body.style.overflow='hidden'; document.getElementById('lb-close').focus(); }
     function close(){ stage.innerHTML=''; lb.hidden=true; document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
-    function step(d){ var list=playable(); if(!list.length) return; var k=list.indexOf(cur); open(list[(k+d+list.length)%list.length]); }
-    grid.addEventListener('click',function(e){ var b=e.target.closest('.gal-item'); if(!b||b.disabled) return; lastFocus=b; open(+b.dataset.i); });
+    function step(d){ var k=real.indexOf(cur); open(real[(k+d+real.length)%real.length]); }
+    rowsEl.addEventListener('click',function(e){ var b=e.target.closest('button.gal-tile'); if(!b) return; lastFocus=b; open(+b.dataset.i); });
     document.getElementById('lb-close').addEventListener('click',close);
     document.getElementById('lb-prev').addEventListener('click',function(){step(-1)});
     document.getElementById('lb-next').addEventListener('click',function(){step(1)});
-    lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+    lb.addEventListener('click',function(e){ if(e.target===lb||e.target===stage) close(); });
     document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowRight') step(1); if(e.key==='ArrowLeft') step(-1); });
   })();
 
